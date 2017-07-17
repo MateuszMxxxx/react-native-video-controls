@@ -1,4 +1,4 @@
-# react-native-video-controls
+# react-native-video-controls README OUT OF DATE! UPDATE NEEDED
 Controls for the React Native `<Video>` component at [react-native-video](https://github.com/react-native-community/react-native-video). For support with RN 0.38.x or lower use version 1.0.x.
 
 ## Features
