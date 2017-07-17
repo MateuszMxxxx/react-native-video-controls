@@ -13,7 +13,7 @@ import {
     Text
 } from 'react-native';
 import _ from 'lodash';
-
+//TODO: Remove unused properties and update readme.
 export default class VideoPlayer extends Component {
 
     constructor( props ) {
@@ -76,7 +76,7 @@ export default class VideoPlayer extends Component {
          * Functions used throughout the application
          */
         this.methods = {
-            onBack: this.props.onBack || this._onBack.bind( this ),
+            onClose: this.props.onClose,
             toggleFullscreen: this._toggleFullscreen.bind( this ),
             togglePlayPause: this._togglePlayPause.bind( this ),
             toggleControls: this._toggleControls.bind( this ),
@@ -409,20 +409,6 @@ export default class VideoPlayer extends Component {
         let state = this.state;
         state.showTimeRemaining = ! state.showTimeRemaining;
         this.setState( state );
-    }
-
-    /**
-     * The default 'onBack' function pops the navigator
-     * and as such the video player requires a
-     * navigator prop by default.
-     */
-    _onBack() {
-        if ( this.props.navigator && this.props.navigator.pop ) {
-            this.props.navigator.pop();
-        }
-        else {
-            console.warn( 'Warning: _onBack requires navigator property to function. Either modify the onBack prop or pass a navigator prop' );
-        }
     }
 
     /**
@@ -787,10 +773,8 @@ export default class VideoPlayer extends Component {
                     style={[ styles.controls.column, styles.controls.vignette,
                 ]}>
                     <View style={ styles.controls.topControlGroup }>
-                        { this.renderBack() }
                         <View style={ styles.controls.pullRight }>
-                            { this.renderVolume() }
-                            { this.renderFullscreen() }
+                            { this.renderClose() }
                         </View>
                     </View>
                 </Image>
@@ -801,55 +785,14 @@ export default class VideoPlayer extends Component {
     /**
      * Back button control
      */
-    renderBack() {
+    renderClose() {
         return this.renderControl(
             <Image
-                source={ require( './assets/img/back.png' ) }
+                source={ require( './assets/img/close.png' ) }
                 style={ styles.controls.back }
             />,
-            this.methods.onBack,
-            styles.controls.back
-        );
-    }
-
-    /**
-     * Render the volume slider and attach the pan handlers
-     */
-    renderVolume() {
-        return (
-            <View style={ styles.volume.container }>
-                <View style={[
-                    styles.volume.fill,
-                    { width: this.state.volumeFillWidth }
-                ]}/>
-                <View style={[
-                    styles.volume.track,
-                    { width: this.state.volumeTrackWidth }
-                ]}/>
-                <View
-                    style={[
-                        styles.volume.handle,
-                        {
-                            left: this.state.volumePosition
-                        }
-                    ]}
-                    { ...this.player.volumePanResponder.panHandlers }
-                >
-                    <Image style={ styles.volume.icon } source={ require( './assets/img/volume.png' ) } />
-                </View>
-            </View>
-        );
-    }
-
-    /**
-     * Render fullscreen toggle and set icon based on the fullscreen state.
-     */
-    renderFullscreen() {
-        let source = this.state.isFullscreen === true ? require( './assets/img/shrink.png' ) : require( './assets/img/expand.png' );
-        return this.renderControl(
-            <Image source={ source } />,
-            this.methods.toggleFullscreen,
-            styles.controls.fullscreen
+            this.methods.onClose,
+            styles.controls.close
         );
     }
 
@@ -880,7 +823,6 @@ export default class VideoPlayer extends Component {
                     styles.controls.bottomControlGroup
                 ]}>
                     { this.renderPlayPause() }
-                    { this.renderTitle() }
                     { this.renderTimer() }
                 </View>
             </Image>
@@ -935,29 +877,6 @@ export default class VideoPlayer extends Component {
             this.methods.togglePlayPause,
             styles.controls.playPause
         );
-    }
-
-    /**
-     * Render our title...if supplied.
-     */
-    renderTitle() {
-        if ( this.opts.title ) {
-            return (
-                <View style={[
-                    styles.controls.control,
-                    styles.controls.title,
-                ]}>
-                    <Text style={[
-                        styles.controls.text,
-                        styles.controls.titleText
-                    ]} numberOfLines={ 1 }>
-                        { this.opts.title || '' }
-                    </Text>
-                </View>
-            );
-        }
-
-        return null;
     }
 
     /**
