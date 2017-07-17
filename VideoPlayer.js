@@ -772,11 +772,9 @@ export default class VideoPlayer extends Component {
                     source={ require( './assets/img/top-vignette.png' ) }
                     style={[ styles.controls.column, styles.controls.vignette,
                 ]}>
-                    <View style={ styles.controls.topControlGroup }>
-                        <View style={ styles.controls.pullRight }>
-                            { this.renderClose() }
-                        </View>
-                    </View>
+					<View style={ styles.controls.pullRight }>
+						{ this.renderClose() }
+					</View>
                 </Image>
             </Animated.View>
         );
@@ -1051,7 +1049,9 @@ const styles = {
         pullRight: {
             flexDirection: 'row',
             alignItems: 'center',
-            justifyContent: 'center',
+            justifyContent: 'flex-end',
+			margin: 12,
+			marginBottom: 18
         },
         top: {
             flex: 1,
@@ -1116,6 +1116,10 @@ const styles = {
             fontSize: 11,
             textAlign: 'right',
         },
+		close:{
+        	width:30,
+			height:30
+		}
     }),
     seek: StyleSheet.create({
         track: {
