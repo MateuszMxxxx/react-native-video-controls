@@ -787,7 +787,7 @@ export default class VideoPlayer extends Component {
         return this.renderControl(
             <Image
                 source={ require( './assets/img/close.png' ) }
-                style={ styles.controls.back }
+                style={ styles.controls.close }
             />,
             this.methods.onClose,
             styles.controls.close
@@ -1047,10 +1047,12 @@ const styles = {
             textAlign: 'center',
         },
         pullRight: {
-            flexDirection: 'row',
-            alignItems: 'center',
-            justifyContent: 'flex-end',
+			flexDirection: 'row',
+			alignItems: 'center',
+			justifyContent: 'flex-end',
 			margin: 12,
+			alignSelf:'stretch',
+			paddingRight:12,
 			marginBottom: 18
         },
         top: {
@@ -1117,8 +1119,8 @@ const styles = {
             textAlign: 'right',
         },
 		close:{
-        	width:30,
-			height:30
+        	width:22,
+			height:22
 		}
     }),
     seek: StyleSheet.create({
