@@ -1133,17 +1133,20 @@ const styles = {
 		fillContainer: {
 			alignSelf: 'flex-start',
 			paddingTop: 10,
+			marginTop: 20,
 			paddingBottom: 10,
 			marginLeft: 28,
 			marginTop: -3,
 		},
 		handle: {
-			marginTop: -6,
+			marginTop: -18,
+			marginLeft:-12
 		},
 		circle: {
 			borderRadius: 6,
 			height: 12,
 			width: 12,
+			margin:12,
 			backgroundColor: "white"
 		},
 	}),
